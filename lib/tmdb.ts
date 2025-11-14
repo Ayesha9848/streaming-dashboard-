@@ -37,4 +37,3 @@ export const fetchTopRated = (page = 1) =>
 
 export const fetchMovieById = (id: string) =>
   request(`/movie/${id}`, { append_to_response: "credits,recommendations" });
-
