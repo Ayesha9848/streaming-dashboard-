@@ -10,23 +10,22 @@ async function request(path: string, params: Record<string, any> = {}) {
   url.searchParams.set("api_key", KEY!);
 
   for (const [key, value] of Object.entries(params)) {
-    if (value !== undefined) {
+    if (value !== undefined && value !== null) {
       url.searchParams.set(key, String(value));
     }
   }
 
-  const res = await fetch(url.toString(), {
-    next: { revalidate: 60 },
-  });
+  const res = await fetch(url.toString(), { next: { revalidate: 60 } });
 
   if (!res.ok) {
     console.error("❌ TMDB ERROR:", res.status, res.statusText);
-    return { results: [] };
+    return null;
   }
 
   return res.json();
 }
 
+// 💡 Correct TMDB endpoints:
 export const fetchPopular = (page = 1) =>
   request("/movie/popular", { page });
 
@@ -37,4 +36,4 @@ export const fetchTopRated = (page = 1) =>
   request("/movie/top_rated", { page });
 
 export const fetchMovieById = (id: string) =>
-  request(`/movie/${id}`, { append_to_response: "credits,recommendations" });
+  request(`/movie/${id}`);
