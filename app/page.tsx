@@ -9,15 +9,18 @@ export default async function Home() {
     fetchTopRated(1)
   ]);
 
-  const hero = popular.results[0];
+  const hero = popular?.results?.[0] ?? null;
+
 
   return (
     <div>
       <HeroBanner movie={hero} />
       <div className="max-w-6xl mx-auto mt-6">
-        <MovieRow categoryTitle="Popular" movies={popular.results} />
-        <MovieRow categoryTitle="Now Playing" movies={now.results} />
-        <MovieRow categoryTitle="Top Rated" movies={top.results} />
+        <MovieRow categoryTitle="Popular" movies={popular?.results ?? []} />
+
+        <MovieRow categoryTitle="Now Playing" movies={now?.results ?? []} />
+        <MovieRow categoryTitle="Top Rated" movies={top?.results ?? []} />
+
       </div>
     </div>
   );
