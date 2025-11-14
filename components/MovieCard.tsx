@@ -6,8 +6,8 @@ import { Movie } from "@/types/movie";
 
 export default function MovieCard({ movie }: { movie: Movie }) {
   const poster = movie.poster_path
-    ? `https://image.tmdb.org/t/p/w300${movie.poster_path}`
-    : "/placeholder.png";
+  ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+  : "/placeholder.png";
 
   return (
     <Link href={`/movie/${movie.id}`} className="block min-w-[140px]">
