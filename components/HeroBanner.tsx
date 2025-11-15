@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { Movie } from "@/types/movie";
 
-export default function HeroBanner({ movie }: { movie: Movie }) {
+export default function HeroBanner({ movie }: { movie: Movie | null }) {
   if (!movie) return null;
 
   return (
@@ -16,12 +16,13 @@ export default function HeroBanner({ movie }: { movie: Movie }) {
         />
       )}
 
-      <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent" />
 
       <div className="absolute bottom-10 left-10 max-w-xl">
         <h1 className="text-4xl font-extrabold">{movie.title}</h1>
-        <p className="mt-3 line-clamp-3 text-white/80">{movie.overview}</p>
+        <p className="mt-4 line-clamp-3 text-white/80">{movie.overview}</p>
       </div>
     </section>
   );
 }
+
