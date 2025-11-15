@@ -10,30 +10,16 @@ async function request(path: string, params: Record<string, any> = {}) {
   url.searchParams.set("api_key", KEY!);
 
   for (const [key, value] of Object.entries(params)) {
-    if (value !== undefined && value !== null) {
-      url.searchParams.set(key, String(value));
-    }
+    if (value !== undefined) url.searchParams.set(key, String(value));
   }
 
   const res = await fetch(url.toString(), { next: { revalidate: 60 } });
-
-  if (!res.ok) {
-    console.error("❌ TMDB ERROR:", res.status, res.statusText);
-    return null;
-  }
-
+  if (!res.ok) return null;
   return res.json();
 }
 
-// 💡 Correct TMDB endpoints:
-export const fetchPopular = (page = 1) =>
-  request("/movie/popular", { page });
+export const fetchPopular = () => request("/movie/popular");
+export const fetchNowPlaying = () => request("/movie/now_playing");
+export const fetchTopRated = () => request("/movie/top_rated");
+export const fetchMovieById = (id: string) => request(`/movie/${id}`);
 
-export const fetchNowPlaying = (page = 1) =>
-  request("/movie/now_playing", { page });
-
-export const fetchTopRated = (page = 1) =>
-  request("/movie/top_rated", { page });
-
-export const fetchMovieById = (id: string) =>
-  request(`/movie/${id}`);
