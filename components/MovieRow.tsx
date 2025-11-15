@@ -1,12 +1,8 @@
 "use client";
-
-import { Movie } from "@/types/movie";
 import MovieCard from "./MovieCard";
+import { Movie } from "@/types/movie";
 
-export default function MovieRow({ categoryTitle, movies }: {
-  categoryTitle: string;
-  movies: Movie[];
-}) {
+export default function MovieRow({ categoryTitle, movies }: { categoryTitle: string; movies: Movie[] }) {
   return (
     <section className="mb-8">
       <h2 className="text-xl font-semibold mb-3">{categoryTitle}</h2>
